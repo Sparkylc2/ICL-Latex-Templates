@@ -1,0 +1,191 @@
+% !TEX root = ../main.tex
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+% ------------------------------------------------%
+\section{Skin-Friction Coefficient Derivation }
+\label{appendix:b}
+The skin friction coefficient \( C_f \) is defined as
+\begin{equation}
+    C_f = \frac{\tau_w}{\frac{\mathup{1}}{\mathup{2}}\rho_a \avg{U}^\mathup{2}}
+\end{equation}
+and the Hagen-Poiseuille equation as
+\begin{equation}
+    \Delta p = \frac{-\mathup{8} \mu L \avg{U}}{R^\mathup{2}} \Rightarrow \Delta p = \frac{-\mathup{32} \mu L \avg{U}}{\left(D\right)^\mathup{2}}
+\end{equation}
+We can take a look at the definition of shear stress derived earlier \eqref{equation:LaminarForceEquilibrium}
+\begin{equation}
+    \tau_w = \frac{D}{\mathup{4}}\frac{\mathrm{d}p}{\mathrm{d}x}
+\end{equation}
+which we can then simplify to
+\begin{equation}
+    \tau_w = \frac{D}{\mathup{4}} \frac{\mathrm{d}p}{\mathrm{d}x} \Rightarrow \tau_w = \frac{D}{\mathup{4}} \frac{\Delta p}{\Delta L} \Rightarrow \tau_w = \frac{D}{\mathup{4}}\frac{\Delta p}{L}
+\end{equation}
+Next we can perform a substitution for \( \Delta p \) in our equation for \( \tau_w \)
+\begin{equation}
+    \tau_w = \frac{D}{\mathup{4}}\frac{\Delta p}{L} \Rightarrow \tau_w = \frac{D}{\mathup{4}}\frac{-\mathup{32} \mu L \avg{U}}{D^\mathup{2} L} = \frac{-\mathup{8} \mu \avg{U}}{D}
+\end{equation}
+Performing another substitution for \( \tau_w \) in our equation for \( C_f \) yields
+\begin{equation}
+    C_f = \frac{\tau_w}{\frac{\mathup{1}}{\mathup{2}}\rho_a \avg{U}^\mathup{2}} \Rightarrow C_f = \frac{\frac{-\mathup{8}\mu \avg{U}}{D}}{\frac{\mathup{1}}{\mathup{2}}\rho_a \avg{U}^\mathup{2}} = \frac{-\mathup{16}\mu}{\rho_a \avg{U}D}
+\end{equation}
+Our skin friction coefficient gains its direction later on, thus onwards we will omit the sign. Recalling the definition of the Reynolds number:
+\begin{equation}
+    Re = \frac{\rho_a \avg{U} D}{\mu}
+\end{equation}
+it should be clear to see our expression for skin friction evaluates to
+\begin{equation}
+    C_f = \frac{\mathup{16}\mu}{\rho_a \avg{U} D} = \mathup{16}\cdot\frac{\mathup{1}}{\frac{\rho_a \avg{U}D}{\mu}} = \mathup{16} \cdot \frac{\mathup{1}}{Re}
+\end{equation}
+Thus, we are able to find that
+\begin{equation}
+    C_f = \frac{\mathup{16}}{Re}
+\end{equation}
+for a pipe within the laminar regimes.
+\newpage
+
+% ------------------------------------------------%
+\section{Analytical Velocity Profile Derivation}
+\label{appendix:c}
+To calculate the analytical equation for the velocity profile, we must derive analytical expressions for the velocity, and the mass flow rate. \par
+\zerodel\\ Our starting point is the Navier-Stokes equation for incompressible flow in cylindrical coordinates \(\left(r,\, \theta,\, z\right)\):
+\begin{equation}
+\label{equations:navier_stokes_equation}
+    \rho\left(\pdv{u_z}{t}+u_r\pdv{u_z}{r} + \frac{u_\theta}{r}\pdv{u_z}{\theta}+u_z\pdv{u_z}{z}\right) = -\pdv{p}{z} + \mu\left(\nabla^2u_z\right)
+\end{equation}
+Next, the following assumptions can be made:
+\begin{align*}
+    \text{Steady Flow} \;\; & \left| \;\; \pdv{u_z}{t} = \mathup{0} \right. \\
+    \text{Fully-developed Flow} \;\; &
+    \left| \;\;
+    \begin{aligned}
+        & u_z = f(r) \Rightarrow \pdv{u_z}{z}, \,\pdv{u_z}{\theta} = \mathup{0}, \\
+        & \pdv{p}{z} = \text{constant}, \;\; u_r = u_\theta = \mathup{0}.
+    \end{aligned}
+    \right\zerodel
+\end{align*}
+Applying the assumptions, our equation simplifies to
+\begin{equation}
+    \mathup{0} = -\pdv{p}{z} + \mu\frac{\mathup{1}}{r}\frac{\partial}{\partial r}\left(r\pdv{u_z}{r}\right) \Rightarrow \frac{\partial}{\partial r}\left(r\pdv{u_z}{r}\right) = r \frac{\mathup{1}}{\mu}\pdv{p}{z}
+\end{equation}
+We can now begin solving for \(u_z\). First we can integrate
+\begin{equation}
+    \mathlarger{\int}\frac{\partial}{\partial r}\left(r\pdv{u_z}{r}\right)\mathrm{d}r = \mathlarger{\int} r \frac{\mathup{1}}{\mu}\pdv{p}{z}\mathrm{d}r \Rightarrow r\pdv{u_z}{r} = \frac{r^\mathup{2}}{\mathup{2}} \frac{\mathup{1}}{\mu}\pdv{p}{z} + C_1
+\end{equation}
+Dividing by r and integrating again
+\begin{equation}
+    \mathlarger{\int} \pdv{u_z}{r} dr= \mathlarger{\int} \frac{r}{\mathup{2}} \frac{\mathup{1}}{\mu}\pdv{p}{z} + \frac{C_1}{r}dr
+    \Rightarrow u_z = \pdv{p}{z}\frac{r^\mathup{2}}{\mathup{4}\mu} + C_1\ln\left({r}\right) + C_2
+\end{equation}
+Solving for the constants is done through the following:
+\begin{align*}
+\text{Singularity removal} \;\; &
+    \left| \;\;
+    \begin{aligned}
+        & \text{At \(r=\mathup{0}\), \(C_1\ln(r)\) is undefined}\\
+        & \Rightarrow C_1 = \mathup{0}
+    \end{aligned}
+    \right\zerodel
+    \\
+\text{'No-slip' condition}\;\; &
+    \left| \;\;
+    \begin{aligned}
+        & \text{At \(r=R\), \(u_z = \mathup{0}\)} \\
+        & \Rightarrow C_2 = -\pdv{p}{z}\frac{R^\mathup{2}}{\mathup{4}\mu}
+    \end{aligned}
+    \right\zerodel
+\end{align*}
+Finally, performing our substitutions yields
+\begin{equation}
+    \label{equations:boundary_layer_velocity_profile}
+    u_z\left(r\right) = \pdv{p}{z}\frac{\mathup{1}}{\mathup{4}\mu}\left(R^\mathup{2} - r^\mathup{2}\right)
+\end{equation}
+\newpage
+\noindent We can now derive an expression for the volumetric flow rate, \(Q\). \\
+By definition:
+\begin{equation}
+\label{equations:definition_of_volumetric_flux}
+    Q = \mathlarger{\iint\limits_\partial} \vec{u} \cdot \mathrm{d}\vec{A}
+\end{equation}
+An immediate change to polar coordinates is obvious, and our bounds of integration become:
+\begin{equation}
+ \partial\left\{(r, \theta) \; \vert \; \mathup{0} \leq r \leq R, \quad \mathup{0} \leq \theta \leq \mathup{2}\pi\right\}\text{,}\;\;\; J\left(r, \theta \right) = r
+\end{equation}
+and, as \(u_z\) is parallel to \(d\vec{A}\), we get
+\begin{equation}
+    Q = \mathlarger{\int\limits_{\mathup{0}}^{R}\int\limits_{\mathup{0}}^{\mathup{2}\pi}}\pdv{p}{z}\frac{\mathup{1}}{\mathup{4}\mu}\left( R^\mathup{2} - r^\mathup{2}\right) \cdot r \mathrm{d}r\mathrm{d}\theta = \pdv{p}{z}\frac{\mathup{1}}{\mathup{4}\mu}\mathlarger{\int\limits_{\mathup{0}}^{R}\int\limits_{\mathup{0}}^{\mathup{2}\pi}} R^\mathup{2}r - r^\mathup{3} \mathrm{d}r\mathrm{d}\theta
+\end{equation}
+No \(\theta\) dependent terms
+\begin{equation}
+    \Rightarrow Q = \pdv{p}{z}\frac{\pi}{\mathup{2}\mu}\mathlarger{\int\limits_{\mathup{0}}^{R}}R^\mathup{2}r - r^\mathup{3} \mathrm{d}r
+\end{equation}
+Finally, integrating with respect to r
+\begin{equation}
+    \Rightarrow \frac{\pi}{\mathup{2}\mu}\pdv{p}{z}\left[\frac{R^\mathup{2}r^\mathup{2}}{\mathup{2}} - \frac{r^\mathup{4}}{\mathup{4}}\right]_{\mathup{0}}^{R} = \pdv{p}{z}\frac{\pi R^\mathup{4}}{\mathup{8}\mu}
+\end{equation}
+Thus
+\begin{equation}
+\label{equations:volumetric_flow_rate}
+    Q = \pdv{p}{z}\frac{\pi R^\mathup{4}}{\mathup{8}\mu}
+\end{equation}
+Pulling together (\ref{equations:boundary_layer_velocity_profile}) and (\ref{equations:volumetric_flow_rate}), we can solve for the remaining parameters in our final analytical solution.
+
+We will first relate the pressure gradient to the maximum velocity \(u_{max}\). From inspection of (\ref{equations:boundary_layer_velocity_profile}), it should be clear:
+\begin{equation}
+\label{equations:pressure_gradient}
+    \left\zerodel u_z \right|_{r = \mathup{0}} = u_{max} =\pdv{p}{z}\frac{R^\mathup{2}}{\mathup{4}\mu} \Rightarrow \pdv{p}{z} = \frac{\mathup{4}\mu u_{max}}{R^\mathup{2}}
+\end{equation}
+Substituting \(\pdv{p}{z}\) back into the velocity profile yields
+\begin{equation}
+    u_z(r) = \frac{\mathup{4}\mu u_{max}}{\mathup{4}\mu R^\mathup{2}}\left(R^\mathup{2} - r^\mathup{2}\right)
+\end{equation}
+Which simplifies to
+\begin{equation}
+\label{equations:velocity_function_of_umax}
+    u_z(r) = u_{max}\left(\mathup{1} - \frac{r^\mathup{2}}{R^\mathup{2}}\right)
+\end{equation}
+
+\newpage
+Next, we need to relate the maximum velocity to the inlet velocity. Using (\ref{equations:definition_of_volumetric_flux}), the inlet velocity can be trivially related to the volumetric flow rate:
+\begin{equation}
+    Q = u_{inlet}A \Rightarrow u_{inlet} = \frac{Q}{\pi R^\mathup{2}}
+\end{equation}
+From (\ref{equations:pressure_gradient}) \& (\ref{equations:volumetric_flow_rate}), substitutions can be made
+\begin{equation}
+    Q = \frac{\pi R^\mathup{4}}{\mathup{8}\mu}\pdv{p}{z} = \frac{\pi R^\mathup{4}}{\mathup{8}\mu} \frac{\mathup{4}\mu u_{max}}{R^\mathup{2}}
+\end{equation}
+which simplifies to
+\begin{equation}
+    Q = \frac{\pi u_{max} R^\mathup{2}}{\mathup{2}}
+\end{equation}
+The inlet velocity then becomes
+\begin{equation}
+    u_{inlet} = \frac{Q}{\pi R^\mathup{2}} =\frac{\pi u_{max} R^\mathup{2}}{\mathup{2}}\frac{\mathup{1}}{\pi R^\mathup{2}} = \frac{u_{max}}{\mathup{2}}
+\end{equation}
+Which finally leaves
+\begin{equation}
+\label{equations:u_max}
+    u_{max} = \mathup{2}u_{inlet}
+\end{equation}
+Finally, substituting (\ref{equations:u_max}) into (\ref{equations:boundary_layer_velocity_profile}), gives us:
+\begin{equation}
+    u(r) = \mathup{2}u_{inlet}\left(\mathup{1} - \left(\frac{r}{R}\right)^\mathup{2}\right)
+\end{equation}
+\newpage
+

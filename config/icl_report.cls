@@ -29,6 +29,30 @@
 \newcommand{\firamath}{Fira Math}
 \newcommand{\firacode}{Fira Code}
 
+\defaultfontfeatures[Inter]{
+  Path=fonts/,
+  Extension=.ttf,
+  FontFace={ul}{n}{Font={*-Thin}},
+  FontFace={ul}{it}{Font={*-ThinItalic}},
+  FontFace={el}{n}{Font={*-ExtraLight}},
+  FontFace={el}{it}{Font={*-ExtraLightItalic}},
+  FontFace={l}{n}{Font={*-Light}},
+  FontFace={l}{it}{Font={*-LightItalic}},
+  UprightFont=*-Regular,
+  ItalicFont=*-Italic,
+  FontFace={mb}{n}{Font={*-Medium}},
+  FontFace={mb}{it}{Font={*-MediumItalic}},
+  FontFace={sb}{n}{Font={*-SemiBold}},
+  FontFace={sb}{it}{Font={*-SemiBoldItalic}},
+  BoldFont=*-Bold,
+  BoldItalicFont=*-BoldItalic,
+  FontFace={eb}{n}{Font={*-ExtraBold}},
+  FontFace={eb}{it}{Font={*-ExtraBoldItalic}},
+  FontFace={ub}{n}{Font={*-Black}},
+  FontFace={ub}{sl}{Font={*-Black}, FakeSlant=0.15},
+}
+
+
 % Set fonts
 \setmainfont{\inter}
 \setmathfont{\firamath}
@@ -42,7 +66,7 @@
 % ==================== MATH PACKAGES ====================
 % Mathematical typesetting
 \RequirePackage{amsmath}
-\RequirePackage{amssymb}
+% \RequirePackage{amssymb}
 \RequirePackage{bigints}  % For large integral signs
 
 % ==================== TABLE PACKAGES ====================
@@ -73,6 +97,9 @@
 \RequirePackage{float}       % Improved float placement
 \RequirePackage{placeins}    % Control float placement with \FloatBarrier
 \RequirePackage{subcaption}  % Subfigures and subcaptions
+\RequirePackage{blindtext}
+\usepackage{titlesec}   % for \titleformat
+
 
 % ==================== COLORS ====================
 \RequirePackage{xcolor}
@@ -129,7 +156,6 @@
 \RequirePackage[labelfont=bf]{caption}  % Bold caption labels
 
 % ==================== REFERENCES ====================
-% Hyperref should be loaded last (with few exceptions)
 \RequirePackage{hyperref}
 
 % ==================== CUSTOM COMMANDS ====================
@@ -144,56 +170,71 @@
 \newcommand{\umin}{\rotatebox[origin=c]{180}{\(\Lambda\)}}
 \newcommand{\umax}{\(\Lambda\)}
 
+
+\newcommand{\inputbody}[1]{\input{body/#1}}
+\newcommand{\inputfigure}[1]{\input{figures/#1}}
+\newcommand{\inputtable}[1]{\input{data/tables/#1}}
+
+
 % ==================== NOMENCLATURE SUPPORT ====================
 % Environment for nomenclature table
-\newenvironment{nomenclaturetable}[1][lXr]{%
-    \section*{Nomenclature}
-    \phantomsection
-    \addcontentsline{toc}{section}{Nomenclature}
-    \renewcommand{\arraystretch}{1.3}
-    \setlength{\extrarowheight}{2pt}
-    \begin{tabularx}{\textwidth}{#1}
-        \toprule
-        \textbf{Symbol} & \textbf{Definition} & \textbf{Unit} \\
-        \midrule
+\newenvironment{nomenclaturetable}{%
+  \section*{Nomenclature}\phantomsection
+  \addcontentsline{toc}{section}{Nomenclature}%
+  \renewcommand{\arraystretch}{1.3}%
+  \setlength{\extrarowheight}{2pt}%
+  \tabularx{\textwidth}{lXr}%
+    \toprule
+    \textbf{Symbol} & \textbf{Definition} & \textbf{Unit} \\ \midrule
 }{%
-        \bottomrule
-    \end{tabularx}
+    \bottomrule
+  \endtabularx%
+  \newpage
 }
 
-% Command to add nomenclature entry
-\newcommand{\nomenclature}[3]{%
-    #1 & #2 & #3 \\
-}
+\newcommand{\nomenclature}[3]{#1 & #2 & #3 \\}
+
+
+
+
+
+
+
+
+
+
+
 
 % ==================== TITLE PAGE ====================
 % Custom title page command
-\newcommand{\makereporttitle}[5]{%
+
+\newcommand{\makereporttitle}[4]{
     \begin{titlepage}
-        \centering
-        \vspace*{2cm}
-
-        % Title
-        {\huge\bfseries #1\par}
-        \vspace{1.5cm}
-
-        % Author
-        {\Large #2\par}
-        \vspace{0.5cm}
-
-        % ID/Course
-        {\large #3\par}
+        \vspace*{-2cm}
+        \centerline{
+            \makebox[\textwidth]{
+                \includegraphics[width=\paperwidth] {
+                    figures/cover_page_header.png
+                }
+            }
+        }
         \vspace{2cm}
-
-        % Abstract
-        \begin{abstract}
-            \noindent #4
-        \end{abstract}
-
+        \center{\textbf{\Large{#1}}}
+        \vspace{1cm}
+        \center{\large{#2}}
+        \center{\large{#3}}
+        \vspace{1cm}
+        \inputbody{abstract.tex}
         \vfill
-
-        % Date
-        {\large #5\par}
+        \center{#4}
+        \vspace*{\fill}
+        \centerline{
+            \makebox[\textwidth]{
+                \includegraphics[width=\paperwidth] {
+                    figures/cover_page_footer.png
+                }
+            }
+        }
     \end{titlepage}
 }
 
@@ -206,6 +247,7 @@
 }
 
 \newcommand{\startmainmatter}{%
+    \newpage
     \setcounter{frontmatterpage}{\value{page}}
     \pagenumbering{arabic}
     \setcounter{page}{1}
@@ -217,27 +259,51 @@
     \setcounter{page}{\value{frontmatterpage}}
 }
 
-% ==================== APPENDIX CONFIGURATION ====================
-% Better appendix formatting
-\newcommand{\startappendices}{%
-    \appendix
-    \renewcommand{\thesection}{Appendix~\Alph{section}}
-    \titleformat{\section}
-        {\normalfont\Large\bfseries}
-        {\thesection:}
-        {0.5em}
-        {}
+
+% ==================== BIBLIOGPRAPHY CONFIGURATION ====================
+
+\newcommand{\makebibliography}[1]{%
+	\bibliographystyle{vancouver}
+    \bibliography{bibliography/#1}
+    \newpage
 }
+
+
+
+
+% ==================== APPENDIX CONFIGURATION ====================
+
+\makeatletter
+\newcommand{\createappendix}{%
+  \phantomsection
+  \addcontentsline{toc}{section}{Appendix}%
+
+  \let\orig@addcontentsline\addcontentsline
+  \def\addcontentsline##1##2##3{%
+    \ifnum\pdfstrcmp{##1}{toc}=0\relax
+    \else
+      \orig@addcontentsline{##1}{##2}{##3}%
+    \fi}%
+
+  \appendix
+
+  \renewcommand{\thesection}{Appendix~\Alph{section}}%
+
+
+  \titleformat{\section}{\normalfont\Large\bfseries}{\thesection\hspace{0.05em}\makebox{:}}{0.5em}{}%
+  \inputbody{appendix}
+}
+\makeatother
 
 % ==================== FIGURE HELPERS ====================
 % Command for standard figure with citation support
-\newcommand{\insertfigure}[4][ht]{%
-    \begin{figure}[#1]
-        \centering
-        \includegraphics[width=#2\linewidth]{#3}
-        \caption{#4}
-        \label{fig:#3}
-    \end{figure}
+\newcommand{\insertfigure}[6]{%
+    \begin{figure}[#1]%
+        \centering%
+        \includegraphics[width=#2\linewidth]{figures/#3}%
+        \caption[#4]{\textbf{#5}}%
+        \label{fig:#6}%
+    \end{figure}%
 }
 
 % ==================== TABLE HELPERS ====================
