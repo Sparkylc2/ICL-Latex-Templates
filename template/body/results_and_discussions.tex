@@ -9,3 +9,29 @@
 
 
 Test~\ref{fig:testfig}
+
+
+
+
+
+\begin{figure}
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+        xlabel={$Re$},
+        ylabel={$C_f$},
+        width = 10cm,
+        height = 8cm,
+    ]
+      \addplot [cRed] table[col sep=comma,x=AxialPosition,y=PressureCoefficient]{data/data.csv};
+      \addlegendentry{Laminar}
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Skin-friction factor vs Reynolds number}
+  \label{fig:testfig2}
+\end{figure}
+
+This is \figref{testfig2}
+
+
+

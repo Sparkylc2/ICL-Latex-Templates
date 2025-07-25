@@ -1,58 +1,93 @@
 
+% \documentclass{icl_report}
+%
+%
+% \begin{document}
+%
+% \startfrontmatter
+% \makereporttitle{Title}{Lukas Campbell}{02627000}{\today}
+%
+%
+% \tableofcontents
+% \newpage
+% \listoffigures
+% \newpage
+% \listoftables
+% \newpage
+%
+%
+%
+% \begin{nomenclaturetable}
+%     \nomenclature{t1}{2}{3}
+%         \nomenclature{t1}{2}{3}
+%
+% \end{nomenclaturetable}
+%
+%
+%
+%
+% \startmainmatter
+%
+%
+%
+% \section{Introduction}
+% \inputbody{introduction}
+% \newpage
+% \section{Setup}
+% \inputbody{setup}
+% \newpage
+% \section{Results and Discussions}
+% \inputbody{results_and_discussions}
+% \newpage
+% \section{Conclusion}
+% \inputbody{conclusion}
+% \newpage
+%
+%
+%
+%
+% \startbackmatter
+%
+%
+%
+% \bibliographystyle{vancouver}
+% \bibliography{bibliography/references}
+% \newpage
+%
+%
+% \createappendix
+%
+% \end{document}
+
+
+
 \documentclass{icl_report}
 
-
 \begin{document}
+    \startfrontmatter
+    \makereporttitle{Theoretical, Computational, and Experimental Approaches to Indeterminate Beams: A Comparative Study}{Lukas Campbell}{02627000}{\today}
+    \newpage
+    \tableofcontents
+    \newpage
 
-\startfrontmatter
-\makereporttitle{Title}{Lukas Campbell}{02627000}{\today}
+    \listoffigures
+    \newpage
 
+    \listoftables
+    \newpage
+    \makenomenclature
 
-\tableofcontents
-\newpage
-\listoffigures
-\newpage
-\listoftables
-\newpage
+    \startmainmatter
 
+    \inputbody{introduction.tex}
+    \inputbody{setup.tex}
+    \inputbody{results_and_discussions.tex}
+    \inputbody{conclusion.tex}
+r
+    \startbackmatter
 
+    \makebibliography{references}
 
-\begin{nomenclaturetable}
-    \nomenclature{t1}{2}{3}
-\end{nomenclaturetable}
-
-
-
-
-\startmainmatter
-
-
-
-\section{Introduction}
-\inputbody{introduction}
-\newpage
-\section{Setup}
-\inputbody{setup}
-\newpage
-\section{Results and Discussions}
-\inputbody{results_and_discussions}
-\newpage
-\section{Conclusion}
-\inputbody{conclusion}
-\newpage
-
-
-
-
-\startbackmatter
-
-
-
-\bibliographystyle{vancouver}
-\bibliography{bibliography/references}
-\newpage
-
-
-\createappendix
+    \createappendix
 
 \end{document}

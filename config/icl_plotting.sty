@@ -1,6 +1,199 @@
+\NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{icl_plotting}[2025/07/26]
 \RequirePackage{pgfplots}
+\pgfplotsset{compat=newest}
+
+\definecolor{cRed}    {RGB}{255,191,191}
+\definecolor{cBlue}   {RGB}{191,223,255}
+\definecolor{cGreen}  {RGB}{191,255,191}
+\definecolor{cYellow} {RGB}{255,223,191}
+\definecolor{cGray}   {RGB}{127,127,127}
+\definecolor{cBackground}{RGB}{249,249,249}
 
 
+% \pgfplotsset{
+%     every axis/.append style = {
+%         axis background/.style = {
+%             fill = cBackground,
+%         },
+%         xmajorgrids = true,
+%         ymajorgrids = true,
+%         xminorgrids = true,
+%         yminorgrids = true,
+%         major grid style = {
+%             line width = 0.7pt,
+%             solid,
+%             opacity = 0.8,
+%         },
+%         minor grid style = {
+%             line width = 0.5pt,
+%             densely dashed,
+%             opacity = 0.5,
+%         },
+%
+%         minor x tick num = 1,
+%         minor y tick num = 1,
+%         tick align = outside,
+%         minor tick length = 2pt,
+%         major tick length = 4pt,
+%
+%         tick label style = {
+%             font = \large,              % 16pt equivalent
+%         },
+%         label style = {
+%             font = \Large,              % 20pt equivalent
+%         },
+%
+%         axis line style = {
+%             line width = 1pt,
+%         },
+%     },
+%     every axis plot/.append style = {
+%         line width = 2pt,
+%         mark size = 4pt,
+%         mark options = {
+%             mark size = 4pt,
+%             line width = 1.25pt,        % matches markeredgewidth
+%             fill opacity = 1,
+%             draw opacity = 1,
+%         },
+%         error bars/.cd,
+%         error bar style = {
+%             line width = 2pt,           % matches elinewidth=2
+%         },
+%         error mark options = {
+%             rotate = 90,
+%             mark size = 2.5pt,          % matches capsize=5
+%             line width = 2pt,
+%         },
+%     },
+%     every axis legend/.append style = {
+%         font = \large,                  % 16pt equivalent
+%         cells = {anchor = west},
+%         legend style = {
+%             fill = cBackground!90,
+%             draw = black,
+%             line width = 1pt,
+%             rounded corners = 3pt,      % Rounded legend box
+%             inner sep = 8pt,
+%             outer sep = 0pt,
+%         },
+%         legend cell align = left,
+%         legend image post style = {
+%             scale = 1.2,                % Make legend markers slightly larger
+%         },
+%     },
+%     % Custom marker styles (colors specified separately)
+%     /pgfplots/diamond/.style = {
+%         mark = diamond*,
+%         mark options = {
+%             draw = black,
+%             line width = 1.25pt,
+%         },
+%     },
+%     /pgfplots/circle/.style = {
+%         mark = *,
+%         mark options = {
+%             draw = black,
+%             line width = 1.25pt,
+%         },
+%     },
+%     /pgfplots/thin diamond/.style = {
+%         mark = diamond,
+%         mark options = {
+%             draw = black,
+%             line width = 1.25pt,
+%         },
+%     },
+%     /pgfplots/square/.style = {
+%         mark = square*,
+%         mark options = {
+%             draw = black,
+%             line width = 1.25pt,
+%         },
+%     },
+%     /pgfplots/triangle/.style = {
+%         mark = triangle*,
+%         mark options = {
+%             draw = black,
+%             line width = 1.25pt,
+%         },
+%     },
+%     /pgfplots/theory solid/.style = {
+%         mark = none,
+%         line width = 2pt,
+%         solid,
+%         black,
+%     },
+%     /pgfplots/theory dashed/.style = {
+%         mark = none,
+%         line width = 2pt,
+%         dashed,
+%         black,
+%     },
+% }
+
+
+ \pgfplotsset{
+     every axis/.append style = {
+         axis background/.style = {
+             fill = cBackground,
+         },
+         xmajorgrids = true,
+         ymajorgrids = true,
+         xminorgrids = true,
+         yminorgrids = true,
+         major grid style = {
+             line width = 0.7pt,
+             solid,
+             opacity = 0.8,
+         },
+         minor grid style = {
+             line width = 0.5pt,
+             densely dashed,
+             opacity = 0.5,
+         },
+         minor x tick num = 1,
+         minor y tick num = 1,
+         tick align = outside,
+         minor tick length = 2pt,
+         major tick length = 4pt,
+         tick label style = {
+            font = \small\fontseries{l}\selectfont,
+         },
+         % label style = {
+         %     font = \regular,
+         % },
+         axis line style = {
+             line width = 1pt,
+         }
+    },
+    every axis plot/.append style = {
+        line width = 2pt,
+        mark size = 4pt,
+        mark options = {
+            mark size = 4pt,
+            line width = 1.25pt,
+            fill opacity = 1,
+            draw opacity = 1,
+        },
+    },
+    every axis legend/.append style = {
+        font = \small\fontseries{l}\selectfont,
+        cells = {anchor = west},
+        legend style = {
+            fill = cBackground!90,
+            draw = black,
+            line width = 1pt,
+            rounded corners = 3pt,
+            inner sep = 8pt,
+            outer sep = 0pt,
+        },
+        legend cell align = left,
+        legend image post style = {
+            scale = 1,
+        },
+    },
+ }
 
 

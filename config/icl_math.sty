@@ -1,0 +1,45 @@
+\ProvidesPackage{icl_math}[2025/07/26]
+
+\newcommand{\avg}[1]{\mkern2mu\overbar{\mkern-2mu #1}}
+\newcommand{\diff}{\mathrm{d}}
+\newcommand{\pdv}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\umin}{\rotatebox[origin=c]{180}{\(\Lambda\)}}
+\newcommand{\umax}{\(\Lambda\)}
+\newcommand{\abs}[1]{\left| #1 \right|}
+
+\makeatletter
+\newcommand{\m}{\@ifnextchar\bgroup\m@braced\m@unbraced}
+\newcommand{\m@braced}[1]{\mathup{#1}}
+\newcommand{\m@unbraced}[1]{\mathup{#1}}
+\makeatother
+
+\newcommand{\size}{2pt}
+
+\newcommand{\eqmat}[4]{
+	\begin{bmatrix}
+		\, #1 & #2 \, \\[\size]
+		\, #3 & #4 \,
+	\end{bmatrix}
+}
+
+\newcommand{\tmat}[2]{
+	\left.
+		\begin{matrix}
+			#1 \\[\size]
+			#2
+		\end{matrix}
+		\:
+	\right\rvert
+}
+
+\newcommand{\vecmat}[2]{
+	\begin{bmatrix}
+		#1 \\[\size]
+		#2
+	\end{bmatrix}
+}
+
+\newcommand{\macauley}[1]{
+	\bigl< \, #1 \, \bigr>
+}
+\newcommand{\zerodel}{.\kern-\nulldelimiterspace}
