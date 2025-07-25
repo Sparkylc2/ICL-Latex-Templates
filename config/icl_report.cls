@@ -20,6 +20,12 @@
 \RequirePackage{graphicx}
 \RequirePackage[percent]{overpic}  % For overlaying text on images
 
+
+% ==================== CUSTOM PACKAGES ====================
+\RequirePackage{icl_tables}
+\RequirePackage{icl_plotting}
+
+
 % ==================== FONT CONFIGURATION ====================
 \RequirePackage{fontspec}
 \RequirePackage[math-style=TeX]{unicode-math}
@@ -82,9 +88,13 @@
 \RequirePackage{tikz-3dplot}
 \RequirePackage{pgfplots}
 \RequirePackage{pgfplotstable}
-\pgfplotsset{compat=1.18}
+\pgfplotsset{compat=1.19}
 \usetikzlibrary{intersections}
 \usepgfplotslibrary{fillbetween}
+
+% Externalize the figures to prevent constant recompilation
+\usepgfplotslibrary{external}
+\tikzexternalize
 
 % Animation support (for PDFs viewed in Adobe Reader)
 \RequirePackage[method=widget]{animate}
@@ -175,24 +185,6 @@
 \newcommand{\inputfigure}[1]{\input{figures/#1}}
 \newcommand{\inputtable}[1]{\input{data/tables/#1}}
 
-
-% ==================== NOMENCLATURE SUPPORT ====================
-% Environment for nomenclature table
-\newenvironment{nomenclaturetable}{%
-  \section*{Nomenclature}\phantomsection
-  \addcontentsline{toc}{section}{Nomenclature}%
-  \renewcommand{\arraystretch}{1.3}%
-  \setlength{\extrarowheight}{2pt}%
-  \tabularx{\textwidth}{lXr}%
-    \toprule
-    \textbf{Symbol} & \textbf{Definition} & \textbf{Unit} \\ \midrule
-}{%
-    \bottomrule
-  \endtabularx%
-  \newpage
-}
-
-\newcommand{\nomenclature}[3]{#1 & #2 & #3 \\}
 
 
 
