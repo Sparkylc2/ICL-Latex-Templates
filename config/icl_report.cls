@@ -366,13 +366,15 @@
 % ==================== FONT CONFIGURATION ====================
 \RequirePackage{fontspec}
 \RequirePackage[math-style=TeX]{unicode-math}
+\setmainfont{SF Pro Display Light}
+\setmathfont{Lete Sans Math}
 
-\newcommand{\fonttext}{SF Pro Display Light}
-\newcommand{\fontmath}{Fira Math}
-\newcommand{\fallbackfont}{Fira Math}
 
-\setmainfont{\fonttext}
-\setmathfont{\fontmath}
+% Use SF Pro for specific ranges:Italic
+
+
+
+% Arev Sans
 
 % ==================== SECTIONING & TOC ====================
 \RequirePackage{titlesec}     % Section formatting
