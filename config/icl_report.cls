@@ -362,6 +362,7 @@
 \RequirePackage{svg}
 \RequirePackage{calc}
 \RequirePackage{ifpdf}
+\RequirePackage{markdown}
 
 % ==================== FONT CONFIGURATION ====================
 \RequirePackage{fontspec}
