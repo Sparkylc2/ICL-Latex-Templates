@@ -18,9 +18,47 @@
 \RequirePackage{mathtools}
 \RequirePackage{bm}
 \RequirePackage{fontspec}
+\RequirePackage{xcolor}
 \RequirePackage[math-style=TeX]{unicode-math}
 \setmainfont{SF Pro Display Light}
 \setmathfont{Lete Sans Math}
+
+% Config for SF Pro font
+\setmainfont{SF Pro Text}[
+	UprightFont = *-Light,
+	BoldFont = *-Semibold,
+]
+
+% Set up SF Pro for math (Latin, Greek, numbers)
+\setmathfont{SF Pro Text Light}[
+range={up/{num,Latin,latin,Greek,greek}},
+script-features={},
+sscript-features={}
+]
+\setmathfont{SF Pro Text Light Italic}[
+range={it/{Latin,latin,Greek,greek}},
+script-features={},
+sscript-features={}
+]
+
+% Store Lete Sans as a font face for fallback
+\newfontface{\letefont}{Lete Sans Math}
+
+% Command to use Lete Sans for missing symbols
+\newcommand{\fsym}[1]{\text{\letefont#1}}
+
+% ---------------
+
+
+
+
+\definecolor{darkbg}{HTML}{181616}
+\definecolor{kanagawawhite}{HTML}{C5C9C5}
+
+\pagecolor{darkbg}
+\color{kanagawawhite}
+
+
 
 \geometry{margin=0in}
 \pagestyle{empty}
@@ -31,7 +69,7 @@
 
 
 \NewDocumentCommand{\setcardsperpage}{m}{%
-    \setcounter{cardsperpage}{#1}%
+	\setcounter{cardsperpage}{#1}%
 }
 
 \newlength{\cardheight}
@@ -42,8 +80,8 @@
 \setlength{\paddingwidth}{12pt}
 
 \NewDocumentCommand{\updatecardsize}{}{%
-    \setlength{\cardheight}{\textheight / \thecardsperpage -2pt }%
-    \setlength{\cardwidth}{\textwidth}%
+	\setlength{\cardheight}{\textheight / \thecardsperpage -2pt }%
+	\setlength{\cardwidth}{\textwidth}%
 }
 
 \AtBeginDocument{\updatecardsize}
@@ -52,51 +90,51 @@
 \setcounter{cardsonpage}{0}
 
 \NewDocumentEnvironment{flashcardenv}{m m}{%
-    \ifnum\thecardsonpage=\thecardsperpage
-        \newpage
-        \setcounter{cardsonpage}{0}%
-    \fi
-    
-    \ifnum\thecardsonpage>0
-        \noindent\rule{\textwidth}{0.4pt}%
-    \fi
-    
-    \noindent
-    \begin{tabularx}{\cardwidth}{X|X}
-        \begin{minipage}[t][\cardheight - 2\textpadding][c]{\linewidth - 2\textpadding}
-            \vspace{\textpadding}
-            \centering
-            \adjustbox{width=\linewidth, totalheight=\cardheight - 4\textpadding, keepaspectratio}{%
-                \begin{minipage}{\linewidth}
-                    \centering
-                    #1
-                \end{minipage}%
-            }
-            \vspace{\textpadding}
-        \end{minipage}
-        &
-        \begin{minipage}[t][\cardheight - 2\textpadding][c]{\linewidth - 2\textpadding}
-            \vspace{\textpadding}
-            \centering
-            \adjustbox{width=\linewidth, totalheight=\cardheight - 4\textpadding, keepaspectratio}{%
-                \begin{minipage}{\linewidth}
-                    \centering
-                    #2
-                \end{minipage}%
-            }
-            \vspace{\textpadding}
-        \end{minipage}
-        \\
-    \end{tabularx}
-    
-    \stepcounter{cardsonpage}%
+	\ifnum\thecardsonpage=\thecardsperpage
+		\newpage
+		\setcounter{cardsonpage}{0}%
+	\fi
+
+	\ifnum\thecardsonpage>0
+		\noindent\rule{\textwidth}{0.4pt}%
+	\fi
+
+	\noindent
+	\begin{tabularx}{\cardwidth}{X|X}
+		\begin{minipage}[t][\cardheight - 2\textpadding][c]{\linewidth - 2\textpadding}
+			\vspace{\textpadding}
+			\centering
+			\adjustbox{width=\linewidth, totalheight=\cardheight - 4\textpadding, keepaspectratio}{%
+				\begin{minipage}{\linewidth}
+					\centering
+					#1
+				\end{minipage}%
+			}
+			\vspace{\textpadding}
+		\end{minipage}
+		 &
+		\begin{minipage}[t][\cardheight - 2\textpadding][c]{\linewidth - 2\textpadding}
+			\vspace{\textpadding}
+			\centering
+			\adjustbox{width=\linewidth, totalheight=\cardheight - 4\textpadding, keepaspectratio}{%
+				\begin{minipage}{\linewidth}
+					\centering
+					#2
+				\end{minipage}%
+			}
+			\vspace{\textpadding}
+		\end{minipage}
+		\\
+	\end{tabularx}
+
+	\stepcounter{cardsonpage}%
 }{%
 }
 
 
 \NewDocumentCommand{\flashcard}{m m}{%
-    \begin{flashcardenv}{#1}{#2}
-    \end{flashcardenv}%
+	\begin{flashcardenv}{#1}{#2}
+	\end{flashcardenv}%
 }
 
 \endinput

@@ -370,12 +370,26 @@
 \setmainfont{SF Pro Display Light}
 \setmathfont{Lete Sans Math}
 
+\setmainfont{SF Pro Text}[
+	UprightFont = *-Light,
+	BoldFont = *-Semibold,
+]
 
-% Use SF Pro for specific ranges:Italic
+\setmathfont{SF Pro Text Light}[
+range={up/{num,Latin,latin,Greek,greek}},
+script-features={},
+sscript-features={}
+]
+\setmathfont{SF Pro Text Light Italic}[
+range={it/{Latin,latin,Greek,greek}},
+script-features={},
+sscript-features={}
+]
 
+\newfontface{\letefont}{Lete Sans Math}
 
+\newcommand{\fsym}[1]{\text{\letefont#1}}
 
-% Arev Sans
 
 % ==================== SECTIONING & TOC ====================
 \RequirePackage{titlesec}     % Section formatting
@@ -407,38 +421,38 @@
 \RequirePackage{tocbasic}
 \setuptoc{lof}{totoc}
 \renewcommand*{\listoffigures}{
-  \phantomsection
-  \listoftoc[List of Figures]{lof}
+	\phantomsection
+	\listoftoc[List of Figures]{lof}
 }
 
 \DeclareTOCStyleEntry[
-  beforeskip=0.8em,
-  dynnumwidth,
-  indent=0pt,
-  entrynumberformat=\figurenumberformat
+	beforeskip=0.8em,
+	dynnumwidth,
+	indent=0pt,
+	entrynumberformat=\figurenumberformat
 ]{tocline}{figure}
 
 \newcommand*{\figurenumberformat}[1]{
-  \textbf{Figure~#1}\enspace
-  \ignorespaces\unskip\hfil
+	\textbf{Figure~#1}\enspace
+	\ignorespaces\unskip\hfil
 }
 
 \setuptoc{lot}{totoc}
 \renewcommand*{\listoftables}{
-  \phantomsection
-  \listoftoc[List of Tables]{lot}
+	\phantomsection
+	\listoftoc[List of Tables]{lot}
 }
 
 \DeclareTOCStyleEntry[
-  beforeskip=0.8em,
-  dynnumwidth,
-  indent=0pt,
-  entrynumberformat=\tablenumberformat
+	beforeskip=0.8em,
+	dynnumwidth,
+	indent=0pt,
+	entrynumberformat=\tablenumberformat
 ]{tocline}{table}
 
 \newcommand*{\tablenumberformat}[1]{%
-  \textbf{Table~#1}\enspace
-  \ignorespaces\unskip\hfil
+	\textbf{Table~#1}\enspace
+	\ignorespaces\unskip\hfil
 }
 
 % ==================== ANIMATION SUPPORT ====================
@@ -463,33 +477,33 @@
 
 % ==================== TITLE PAGE ====================
 \newcommand{\makereporttitle}[4]{
-    \begin{titlepage}
-        \vspace*{-2cm}
-        \centerline{
-            \makebox[\textwidth]{
-                \includegraphics[width=\paperwidth] {
-                    figures/cover_page_header.png
-                }
-            }
-        }
-        \vspace{2cm}
-        \center{\textbf{\Large{#1}}}
-        \vspace{1cm}
-        \center{\large{#2}}
-        \center{\large{#3}}
-        \vspace{1cm}
-        \inputbody{abstract.tex}
-        \vfill
-        \center{#4}
-        \vspace*{\fill}
-        \centerline{
-            \makebox[\textwidth]{
-                \includegraphics[width=\paperwidth] {
-                    figures/cover_page_footer.png
-                }
-            }
-        }
-    \end{titlepage}
+	\begin{titlepage}
+		\vspace*{-2cm}
+		\centerline{
+			\makebox[\textwidth]{
+				\includegraphics[width=\paperwidth] {
+					figures/cover_page_header.png
+				}
+			}
+		}
+		\vspace{2cm}
+		\center{\textbf{\Large{#1}}}
+		\vspace{1cm}
+		\center{\large{#2}}
+		\center{\large{#3}}
+		\vspace{1cm}
+		\inputbody{abstract.tex}
+		\vfill
+		\center{#4}
+		\vspace*{\fill}
+		\centerline{
+			\makebox[\textwidth]{
+				\includegraphics[width=\paperwidth] {
+					figures/cover_page_footer.png
+				}
+			}
+		}
+	\end{titlepage}
 }
 
 
@@ -498,96 +512,96 @@
 \newcounter{frontmatterpage}
 
 \newcommand{\startfrontmatter}{%
-    \pagenumbering{roman}
+	\pagenumbering{roman}
 }
 
 \newcommand{\startmainmatter}{%
-    \newpage
-    \setcounter{frontmatterpage}{\value{page}}
-    \pagenumbering{arabic}
-    \setcounter{page}{1}
+	\newpage
+	\setcounter{frontmatterpage}{\value{page}}
+	\pagenumbering{arabic}
+	\setcounter{page}{1}
 }
 
 \newcommand{\startbackmatter}{%
-    \newpage
-    \pagenumbering{roman}
-    \setcounter{page}{\value{frontmatterpage}}
+	\newpage
+	\pagenumbering{roman}
+	\setcounter{page}{\value{frontmatterpage}}
 }
 
 % ==================== NOMENCLATURE ====================
 \newcommand{\makenomenclature}{%
-  \section*{Nomenclature}\phantomsection
-  \addcontentsline{toc}{section}{Nomenclature}%
-    \input{body/nomenclature.tex}
-    \newpage
+	\section*{Nomenclature}\phantomsection
+	\addcontentsline{toc}{section}{Nomenclature}%
+	\input{body/nomenclature.tex}
+	\newpage
 }
 
 % ==================== BIBLIOGRAPHY CONFIGURATION ====================
 \newcommand{\makebibliography}[1]{%
-    \newpage
-    \phantomsection
-    \addcontentsline{toc}{section}{References}
-    \bibliographystyle{vancouver}
-    \bibliography{bibliography/#1}
+	\newpage
+	\phantomsection
+	\addcontentsline{toc}{section}{References}
+	\bibliographystyle{vancouver}
+	\bibliography{bibliography/#1}
 }
 
 % ==================== APPENDIX CONFIGURATION ====================
 \makeatletter
 \newcommand{\createappendix}{%
-    \newpage
-    \phantomsection
-    \addcontentsline{toc}{section}{Appendix}
-    \begingroup
-    \let\orig@addcontentsline\addcontentsline
-    \renewcommand{\addcontentsline}[3]{%
-        \ifnum\pdfstrcmp{##1}{toc}=0
-        \else
-            \orig@addcontentsline{##1}{##2}{##3}%
-        \fi
-    }%
-    \appendix
-    \renewcommand{\thesection}{Appendix~\Alph{section}}%
-    \titleformat{\section}%
-        {\normalfont\Large\bfseries}%
-        {\thesection:}%
-        {0.5em}%
-        {}%
-    \input{body/appendix}%
-    \endgroup
+	\newpage
+	\phantomsection
+	\addcontentsline{toc}{section}{Appendix}
+	\begingroup
+	\let\orig@addcontentsline\addcontentsline
+	\renewcommand{\addcontentsline}[3]{%
+		\ifnum\pdfstrcmp{##1}{toc}=0
+		\else
+		\orig@addcontentsline{##1}{##2}{##3}%
+		\fi
+	}%
+	\appendix
+	\renewcommand{\thesection}{Appendix~\Alph{section}}%
+	\titleformat{\section}%
+	{\normalfont\Large\bfseries}%
+	{\thesection:}%
+	{0.5em}%
+	{}%
+	\input{body/appendix}%
+	\endgroup
 }
 \makeatother
 
 % ==================== FIGURE HELPERS ====================
 \newcommand{\insertfigure}[6]{%
-    \begin{figure}[#1]%
-        \centering%
-        \includegraphics[width=#2\linewidth]{figures/#3}%
-        \caption[#4]{\textbf{#5}}%
-        \label{fig:#6}%
-    \end{figure}%
+	\begin{figure}[#1]%
+		\centering%
+		\includegraphics[width=#2\linewidth]{figures/#3}%
+		\caption[#4]{\textbf{#5}}%
+		\label{fig:#6}%
+	\end{figure}%
 }
 
 \newcommand{\figref}[1]{%
-    \hyperref[fig:#1]{Figure~\ref{fig:#1}}%
+	\hyperref[fig:#1]{Figure~\ref{fig:#1}}%
 }
 
 \newcommand{\figrefname}[2]{%
-    \hyperref[fig:#1]{#2~\ref{fig:#1}}%
+	\hyperref[fig:#1]{#2~\ref{fig:#1}}%
 }
 
 % ==================== TABLE HELPERS ====================
 \newenvironment{reporttable}[2][ht]{%
-    \begin{table}[#1]
-        \centering
-        \caption{#2}
-}{%
-    \end{table}
+	\begin{table}[#1]
+		\centering
+		\caption{#2}
+		}{%
+	\end{table}
 }
 
 \newcommand{\tableref}[1]{%
-    \hyperref[table:#1]{Table~\ref{table:#1}}%
+	\hyperref[table:#1]{Table~\ref{table:#1}}%
 }
 
 \newcommand{\tablerefname}[2]{%
-    \hyperref[table:#1]{#2~\ref{table:#1}}%
+	\hyperref[table:#1]{#2~\ref{table:#1}}%
 }

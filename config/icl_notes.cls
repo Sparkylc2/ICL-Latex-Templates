@@ -6,7 +6,6 @@
 \LoadClass[a4paper,12pt]{article}
 
 % ==================== CORE PACKAGES ====================
-% The packages essential for basic functionality
 \RequirePackage{blindtext}
 % Geometry - page layout
 \RequirePackage[top=2.54cm,bottom=2.54cm,left=2.54cm,right=2.54cm]{geometry}
@@ -42,18 +41,18 @@
 \RequirePackage{ifpdf}
 \RequirePackage{markdown}
 
+
 % ==================== FONT CONFIGURATION ====================
 \RequirePackage{fontspec}
+\RequirePackage{lete-sans-math}
 \RequirePackage[math-style=TeX]{unicode-math}
 \setmainfont{SF Pro Display Light}
-\setmathfont{Lete Sans Math}
-
-
-% Use SF Pro for specific ranges:Italic
+% \setmathfont{Lete Sans Math}
 
 
 
-% Arev Sans
+
+
 
 % ==================== SECTIONING & TOC ====================
 \RequirePackage{titlesec}     % Section formatting
@@ -101,38 +100,37 @@
 \RequirePackage{icl_math}
 
 
-% ==================== APPENDIX CONFIGURATION ====================
 % ==================== FIGURE HELPERS ====================
 \newcommand{\insertfigure}[6]{%
-    \begin{figure}[#1]%
-        \centering%
-        \includegraphics[width=#2\linewidth]{figures/#3}%
-        \caption[#4]{\textbf{#5}}%
-        \label{fig:#6}%
-    \end{figure}%
+	\begin{figure}[#1]%
+		\centering%
+		\includegraphics[width=#2\linewidth]{figures/#3}%
+		\caption[#4]{\textbf{#5}}%
+		\label{fig:#6}%
+	\end{figure}%
 }
 
 \newcommand{\figref}[1]{%
-    \hyperref[fig:#1]{Figure~\ref{fig:#1}}%
+	\hyperref[fig:#1]{Figure~\ref{fig:#1}}%
 }
 
 \newcommand{\figrefname}[2]{%
-    \hyperref[fig:#1]{#2~\ref{fig:#1}}%
+	\hyperref[fig:#1]{#2~\ref{fig:#1}}%
 }
 
 % ==================== TABLE HELPERS ====================
 \newenvironment{notetable}[2][ht]{%
-    \begin{table}[#1]
-        \centering
-        \caption{#2}
-}{%
-    \end{table}
+	\begin{table}[#1]
+		\centering
+		\caption{#2}
+		}{%
+	\end{table}
 }
 
 \newcommand{\tableref}[1]{%
-    \hyperref[table:#1]{Table~\ref{table:#1}}%
+	\hyperref[table:#1]{Table~\ref{table:#1}}%
 }
 
 \newcommand{\tablerefname}[2]{%
-    \hyperref[table:#1]{#2~\ref{table:#1}}%
+	\hyperref[table:#1]{#2~\ref{table:#1}}%
 }
